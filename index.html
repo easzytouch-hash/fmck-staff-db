@@ -6,35 +6,30 @@
 <title>FMCK Staff Database</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--green:#1A6B3A;--green-mid:#2E8B57;--green-dark:#0F4024;--green-light:#E8F5EE;--green-pale:#F2FAF5;--green-border:#B8DECA;--bg:#F4F9F6;--surface:#FFFFFF;--surface2:#EEF7F2;--border:rgba(26,107,58,0.12);--border2:rgba(26,107,58,0.25);--text:#12301E;--text2:#3A6B4E;--text3:#7EA88D;--danger:#C0392B;--danger-bg:#FDF0EE;--success-bg:#E8F5EE;--warn-bg:#FEF9E7;--warn:#7D5A00;--radius:10px;--radius-lg:14px;}
+:root{--green:#1A6B3A;--green-mid:#2E8B57;--green-dark:#0F4024;--green-light:#E8F5EE;--green-pale:#F2FAF5;--green-border:#B8DECA;--bg:#F4F9F6;--surface:#FFFFFF;--border:rgba(26,107,58,0.12);--border2:rgba(26,107,58,0.25);--text:#12301E;--text2:#3A6B4E;--text3:#7EA88D;--danger:#C0392B;--danger-bg:#FDF0EE;--success-bg:#E8F5EE;--warn-bg:#FEF9E7;--warn:#7D5A00;--radius:10px;--radius-lg:14px;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
 
-/* ── SIGN-IN ── */
 #signin-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--green-dark);padding:1.5rem;}
 .signin-card{background:white;border-radius:18px;padding:2.5rem 2rem;width:100%;max-width:380px;box-shadow:0 8px 40px rgba(0,0,0,0.22);}
 .signin-logo{text-align:center;margin-bottom:1.75rem;}
 .signin-logo img{width:88px;height:88px;border-radius:50%;object-fit:cover;margin-bottom:.75rem;border:3px solid var(--green-border);}
 .signin-logo h1{font-size:16px;font-weight:600;color:var(--green);}
 .signin-logo p{font-size:11px;color:var(--text3);margin-top:2px;}
-.divider{display:flex;align-items:center;gap:10px;margin:1.25rem 0;color:var(--text3);font-size:11px;}
+.btn-google{width:100%;padding:11px 16px;background:white;color:#3c4043;border:1px solid #dadce0;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:box-shadow .15s;margin-bottom:.75rem;}
+.btn-google:hover{box-shadow:0 2px 8px rgba(0,0,0,0.12);}
+.btn-google svg{width:18px;height:18px;flex-shrink:0;}
+.divider{display:flex;align-items:center;gap:10px;margin:.75rem 0;color:var(--text3);font-size:11px;}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border2);}
-
-/* Local sign-in */
 .form-group{margin-bottom:.875rem;}
 .form-group label{display:block;font-size:11px;font-weight:500;color:var(--text2);margin-bottom:4px;letter-spacing:.04em;text-transform:uppercase;}
 .form-group input{width:100%;padding:9px 12px;border:1px solid var(--border2);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--bg);transition:border-color .15s;}
 .form-group input:focus{outline:none;border-color:var(--green-mid);background:white;}
 .btn-local{width:100%;padding:10px;background:var(--green);color:white;border:none;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .15s;}
 .btn-local:hover{background:var(--green-mid);}
-
-/* Google sign-in */
-.btn-google{width:100%;padding:10px 16px;background:white;color:#3c4043;border:1px solid #dadce0;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:box-shadow .15s;}
-.btn-google:hover{box-shadow:0 2px 8px rgba(0,0,0,0.12);}
-.btn-google svg{width:18px;height:18px;flex-shrink:0;}
 .signin-error{color:var(--danger);font-size:12px;text-align:center;margin-top:.75rem;min-height:16px;}
+.signin-note{font-size:11px;color:var(--text3);text-align:center;margin-top:.75rem;}
 
-/* ── APP ── */
 #app{display:none;}
 .header{background:var(--green);color:white;padding:0 1rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.18);}
 .header-left{display:flex;align-items:center;gap:10px;}
@@ -43,23 +38,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .header-left p{font-size:10px;opacity:.65;margin-top:1px;}
 .header-right{display:flex;align-items:center;gap:8px;}
 .user-pill{background:rgba(255,255,255,0.12);border-radius:20px;padding:4px 10px;font-size:12px;display:flex;align-items:center;gap:6px;}
-.avatar-ring{width:22px;height:22px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,0.4);}
+.avatar-img{width:22px;height:22px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,0.4);}
 .avatar-init{width:22px;height:22px;background:rgba(255,255,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;}
 .btn-signout{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;border-radius:6px;padding:4px 9px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-signout:hover{background:rgba(255,255,255,0.2);}
 
-/* Sync bar */
-.sync-bar{background:var(--green-light);border-bottom:1px solid var(--green-border);padding:5px 1rem;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--green);}
-.sync-bar.error{background:#FDF0EE;border-color:#f0b8b0;color:var(--danger);}
+.sync-bar{padding:5px 1rem;display:flex;align-items:center;justify-content:space-between;font-size:11px;border-bottom:1px solid var(--green-border);background:var(--green-light);color:var(--green);transition:all .3s;}
 .sync-bar.syncing{background:#FEF9E7;border-color:#f0d890;color:var(--warn);}
-.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--green-mid);display:inline-block;margin-right:5px;}
-.sync-bar.error .sync-dot{background:var(--danger);}
-.sync-bar.syncing .sync-dot{background:#E6A817;animation:pulse 1s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.btn-sync-now{background:none;border:1px solid currentColor;border-radius:5px;padding:2px 8px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;color:inherit;}
+.sync-bar.error{background:var(--danger-bg);border-color:#f0b8b0;color:var(--danger);}
+.sync-bar.local{background:#EEF4FF;border-color:#b8c8e8;color:#2c4a8c;}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;margin-right:5px;opacity:.8;}
+.sync-bar.syncing .sync-dot{animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.btn-sync{background:none;border:1px solid currentColor;border-radius:5px;padding:2px 8px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;color:inherit;}
 
-.content{padding:1rem;max-width:920px;margin:0 auto;}
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.content{padding:1rem;max-width:960px;margin:0 auto;}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem;}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;text-align:center;}
 .stat-card .n{font-size:22px;font-weight:600;color:var(--green);}
 .stat-card .lbl{font-size:10px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:.04em;}
@@ -67,7 +61,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .paste-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem;margin-bottom:1rem;}
 .panel-title{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;}
 .paste-area{display:flex;gap:8px;align-items:flex-start;}
-.paste-area textarea{flex:1;min-height:64px;padding:9px 11px;border:1px solid var(--border2);border-radius:var(--radius);font-family:'DM Mono',monospace;font-size:12px;color:var(--text);background:var(--bg);resize:vertical;line-height:1.6;transition:border-color .15s;}
+.paste-area textarea{flex:1;min-height:60px;padding:9px 11px;border:1px solid var(--border2);border-radius:var(--radius);font-family:'DM Mono',monospace;font-size:12px;color:var(--text);background:var(--bg);resize:vertical;line-height:1.6;transition:border-color .15s;}
 .paste-area textarea:focus{outline:none;border-color:var(--green-mid);background:white;}
 .btn-add{padding:9px 18px;background:var(--green);color:white;border:none;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background .15s;}
 .btn-add:hover{background:var(--green-mid);}
@@ -83,26 +77,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .ctrl-row input[type=text]:focus{outline:none;border-color:var(--green-mid);}
 .ctrl-row select{padding:8px 11px;border:1px solid var(--border2);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:var(--surface);}
 .cnt-label{font-size:12px;color:var(--text3);white-space:nowrap;}
-.btn-export{padding:8px 14px;border:1px solid var(--border2);border-radius:var(--radius);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;white-space:nowrap;}
+.btn-export{padding:8px 14px;border:1px solid var(--border2);border-radius:var(--radius);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;}
 .btn-export:hover{background:var(--green-light);color:var(--green);}
 
 .tbl-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;overflow-x:auto;}
-table{width:100%;border-collapse:collapse;font-size:13px;min-width:580px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px;}
 thead th{background:var(--green);color:rgba(255,255,255,0.78);font-weight:500;font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:10px;text-align:left;cursor:pointer;user-select:none;white-space:nowrap;}
 thead th:hover{color:white;}
 tbody td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:middle;}
 tbody tr:last-child td{border-bottom:none;}
 tbody tr:hover td{background:var(--green-pale);}
-tbody tr.new-entry td{background:#DFFAEB;}
+tbody tr.new-row td{background:#DFFAEB;}
 .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;}
 .b-senior{background:#D4EAF9;color:#0C447C;}
 .b-junior{background:#D8F0E4;color:#1A6B3A;}
-.del-btn{background:none;border:none;cursor:pointer;color:var(--text3);font-size:14px;padding:3px 7px;border-radius:5px;transition:all .12s;}
+.b-active{background:#D8F0E4;color:#1A6B3A;}
+.b-inactive{background:#FDECEA;color:#C0392B;}
+.del-btn{background:none;border:none;cursor:pointer;color:var(--text3);font-size:14px;padding:3px 7px;border-radius:5px;}
 .del-btn:hover{color:var(--danger);background:var(--danger-bg);}
 .mono{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);}
-.empty-state{text-align:center;padding:2.5rem 1rem;color:var(--text3);}
-.storage-bar{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:8px;padding:6px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);}
-@media(max-width:480px){.content{padding:.75rem}.signin-card{padding:2rem 1.25rem}.stats-row{gap:6px}.stat-card .n{font-size:18px}}
+.sheets-link{font-size:11px;color:var(--green-mid);text-decoration:none;}
+.sheets-link:hover{text-decoration:underline;}
+.footer-bar{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:8px;padding:6px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);flex-wrap:wrap;gap:6px;}
+.empty-state{text-align:center;padding:2.5rem;color:var(--text3);}
+@media(max-width:500px){.stats-row{grid-template-columns:repeat(2,1fr);}.content{padding:.75rem;}}
 </style>
 </head>
 <body>
@@ -116,24 +114,24 @@ tbody tr.new-entry td{background:#DFFAEB;}
       <p>Federal Medical Centre Kumo &mdash; Staff Portal</p>
     </div>
 
-    <!-- Google Sign-In -->
     <button class="btn-google" onclick="signInWithGoogle()">
-      <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
-      Sign in with Google (Drive Sync)
+      <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      Sign in with Google &mdash; Sheets Sync
     </button>
 
-    <div class="divider">or use local account</div>
+    <div class="divider">or local access</div>
 
     <div class="form-group">
       <label>Username</label>
-      <input type="text" id="si-user" placeholder="Enter username" autocomplete="username">
+      <input type="text" id="si-user" placeholder="admin" autocomplete="username">
     </div>
     <div class="form-group">
       <label>Password</label>
-      <input type="password" id="si-pass" placeholder="Enter password" autocomplete="current-password">
+      <input type="password" id="si-pass" placeholder="Password" autocomplete="current-password">
     </div>
-    <button class="btn-local" onclick="doLocalSignIn()">Sign In (Local Only)</button>
+    <button class="btn-local" onclick="doLocalSignIn()">Sign In (Offline Mode)</button>
     <div class="signin-error" id="si-err"></div>
+    <div class="signin-note">Google sign-in syncs with Google Sheets &amp; AppSheet in real time</div>
   </div>
 </div>
 
@@ -149,16 +147,16 @@ tbody tr.new-entry td{background:#DFFAEB;}
     </div>
     <div class="header-right">
       <div class="user-pill">
-        <div id="user-avatar-wrap"></div>
-        <span id="user-name-display">User</span>
+        <div id="avatar-wrap"></div>
+        <span id="user-label">User</span>
       </div>
       <button class="btn-signout" onclick="doSignOut()">Sign out</button>
     </div>
   </div>
 
   <div class="sync-bar" id="sync-bar">
-    <span><span class="sync-dot"></span><span id="sync-msg">Loading&hellip;</span></span>
-    <button class="btn-sync-now" onclick="syncNow()">Sync now</button>
+    <span><span class="sync-dot"></span><span id="sync-msg">Connecting to Google Sheets&hellip;</span></span>
+    <button class="btn-sync" onclick="syncNow()">&#8635; Sync</button>
   </div>
 
   <div class="content">
@@ -166,10 +164,11 @@ tbody tr.new-entry td{background:#DFFAEB;}
       <div class="stat-card"><div class="n" id="st-total">0</div><div class="lbl">Total Staff</div></div>
       <div class="stat-card"><div class="n" id="st-senior">0</div><div class="lbl">Senior</div></div>
       <div class="stat-card"><div class="n" id="st-junior">0</div><div class="lbl">Junior</div></div>
+      <div class="stat-card"><div class="n" id="st-active">0</div><div class="lbl">Active</div></div>
     </div>
 
     <div class="paste-panel">
-      <div class="panel-title">Add new staff member</div>
+      <div class="panel-title">Add new staff — paste entry</div>
       <div class="paste-area">
         <textarea id="paste-in" placeholder="HARUNA HAJARA - STAFF MIDWIFE - FMCK/SP/223&#10;Paste one or many lines at once"></textarea>
         <button class="btn-add" onclick="handlePaste()">Add &#8629;</button>
@@ -185,20 +184,31 @@ tbody tr.new-entry td{background:#DFFAEB;}
         <option value="Senior">Senior Staff</option>
         <option value="Junior">Junior Staff</option>
       </select>
+      <select id="statusF" onchange="render()">
+        <option value="">All statuses</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
       <span class="cnt-label" id="cnt"></span>
-      <button class="btn-export" onclick="exportCSV()">&#8659; Export CSV</button>
+      <button class="btn-export" onclick="exportCSV()">&#8659; CSV</button>
     </div>
 
     <div class="tbl-card">
       <table>
-        <colgroup><col style="width:46px"><col style="width:28%"><col style="width:33%"><col style="width:16%"><col style="width:11%"><col style="width:52px"></colgroup>
+        <colgroup>
+          <col style="width:44px"><col style="width:24%"><col style="width:28%">
+          <col style="width:14%"><col style="width:9%"><col style="width:18%">
+          <col style="width:9%"><col style="width:44px">
+        </colgroup>
         <thead>
           <tr>
-            <th onclick="sortBy('sn')">S/N <span id="s-sn"></span></th>
-            <th onclick="sortBy('name')">Name <span id="s-name"></span></th>
-            <th onclick="sortBy('designation')">Designation <span id="s-designation"></span></th>
-            <th onclick="sortBy('staffNo')">Staff No. <span id="s-staffNo"></span></th>
-            <th onclick="sortBy('category')">Cat. <span id="s-category"></span></th>
+            <th onclick="sortBy('sn')">S/N<span id="s-sn"></span></th>
+            <th onclick="sortBy('name')">Name<span id="s-name"></span></th>
+            <th onclick="sortBy('designation')">Designation<span id="s-designation"></span></th>
+            <th onclick="sortBy('staffNo')">Staff No.<span id="s-staffNo"></span></th>
+            <th onclick="sortBy('category')">Cat.<span id="s-category"></span></th>
+            <th onclick="sortBy('department')">Department<span id="s-department"></span></th>
+            <th onclick="sortBy('status')">Status<span id="s-status"></span></th>
             <th></th>
           </tr>
         </thead>
@@ -206,440 +216,347 @@ tbody tr.new-entry td{background:#DFFAEB;}
       </table>
       <div class="empty-state" id="empty" style="display:none"><p>No records match your search.</p></div>
     </div>
-    <div class="storage-bar">
-      <span id="storage-info">Loading&hellip;</span>
-      <span id="last-synced" style="color:var(--text3)"></span>
+
+    <div class="footer-bar">
+      <span id="footer-count">0 records</span>
+      <span id="last-sync" style="color:var(--text3)"></span>
+      <a class="sheets-link" id="sheets-link" href="#" target="_blank">&#128196; Open in Google Sheets</a>
     </div>
   </div>
 </div>
 
-<!-- Google API -->
 <script src="https://accounts.google.com/gsi/client" async></script>
 <script>
-// ── CONFIG ──
-const CLIENT_ID = '699809228435-5j8nar0aahttui5rikpiss00o968t9cd.apps.googleusercontent.com';
-const SCOPES    = 'https://www.googleapis.com/auth/drive.file';
-const FILE_NAME = 'FMCK_Staff_Database.json';
-const LOCAL_KEY = 'fmck_db_v3';
-const SESSION_KEY = 'fmck_session_v3';
-const LOCAL_USERS = { admin: { password: 'fmck2024', displayName: 'Admin (Local)' } };
+// ── CONFIG ──────────────────────────────────────
+const CLIENT_ID  = '555263623276-6rpitioavir9mghpad35b77oja53mr81.apps.googleusercontent.com';
+const SHEET_ID   = '1_TcBnRDDG26SJAKsN3AzFsJGnBAdTtrS';
+const SHEET_TAB  = 'Staff Register';
+const SHEET_URL  = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit';
+const SCOPES     = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
+const LOCAL_KEY  = 'fmck_local_v4';
+const SESS_KEY   = 'fmck_sess_v4';
+const LOCAL_USERS = { admin: { password: 'fmck2024', displayName: 'Admin (Offline)' } };
+
+// ── ROW MAPPING (columns in Sheet, 0-indexed after header) ──
+// A=S/N  B=Full Name  C=Designation  D=Staff Number  E=Category
+// F=Department  G=Date Added  H=Phone  I=Email  J=Passport Photo  K=Status  L=Remarks
+const COL = { sn:0, name:1, designation:2, staffNo:3, category:4, department:5, dateAdded:6, phone:7, email:8, passport:9, status:10, remarks:11 };
+const HEADER_ROW = 5; // data starts at sheet row 6 (0-indexed row 5)
+const DATA_START = 6; // 1-indexed sheet row where data begins
 
 // ── STATE ──
-let db = [], currentUser = null, driveFileId = null, accessToken = null;
-let sortCol = 'sn', sortDir = 1, syncTimer = null;
+let db=[], accessToken=null, currentUser=null, sortCol='sn', sortDir=1, autoTimer=null;
 
-// ── DEFAULT DATA ──
-const DEFAULT_DB = [
-  {sn:1,name:"Rukayyat Abubakar Muhammad",designation:"Nursing Officer",staffNo:"FMCK/SP/178",category:"Senior",isNew:false},
-  {sn:2,name:"Aliyu Mahdi",designation:"Environmental Health Technician",staffNo:"FMCK/SP/176",category:"Senior",isNew:false},
-  {sn:3,name:"Aishatu Umar Hassan",designation:"Community Health Technician",staffNo:"FMCK/SP/175",category:"Senior",isNew:false},
-  {sn:4,name:"Hauwa Ahmed Mahdi",designation:"Staff Nurse",staffNo:"FMCK/SP/174",category:"Senior",isNew:false},
-  {sn:5,name:"Maryam Hassan",designation:"Scientific Officer II",staffNo:"FMCK/SP/173",category:"Senior",isNew:false},
-  {sn:6,name:"Altine Mohammed",designation:"Health Information Management Technician",staffNo:"FMCK/SP/172",category:"Senior",isNew:false},
-  {sn:7,name:"Rejoice Amanda Fashi",designation:"Chief Nursing Officer",staffNo:"FMCK/SP/171",category:"Senior",isNew:false},
-  {sn:8,name:"Fatima Ahmad Shuaibu",designation:"Staff Midwife",staffNo:"FMCK/SP/179",category:"Senior",isNew:false},
-  {sn:10,name:"Ahmad Ibrahim",designation:"Medical Laboratory Technician",staffNo:"FMCK/JP/038",category:"Junior",isNew:false},
-  {sn:11,name:"Haruna Adamu",designation:"Technical Officer Electrical",staffNo:"FMCK/JP/039",category:"Junior",isNew:false},
-  {sn:12,name:"Abubakar Abdulsalam Muhammad",designation:"Asst. Information Officer",staffNo:"FMCK/JP/040",category:"Junior",isNew:false},
-  {sn:13,name:"Basma Zakariyya Ishaq",designation:"Senior Craftsman Tailoring",staffNo:"FMCK/JP/041",category:"Junior",isNew:false},
-  {sn:14,name:"Abdulabbar Isah",designation:"Health Attendant",staffNo:"FMCK/JP/042",category:"Junior",isNew:false},
-  {sn:15,name:"Mohammed Manga Suleiman",designation:"Health Attendant",staffNo:"FMCK/JP/043",category:"Junior",isNew:false},
-  {sn:16,name:"Kabiru Mahmuda",designation:"Senior Craftsman Plumbing",staffNo:"FMCK/JP/044",category:"Junior",isNew:false},
-  {sn:17,name:"Muazu Abdulrahman Ishaq",designation:"Clerical Officer II",staffNo:"FMCK/JP/045",category:"Junior",isNew:false},
-  {sn:18,name:"Aminu Muhammad Danzaria",designation:"Clerical Officer",staffNo:"FMCK/JP/046",category:"Junior",isNew:false},
-  {sn:19,name:"Musa Saidu Mohammed",designation:"Motor Driver Mechanic",staffNo:"FMCK/JP/048",category:"Junior",isNew:false},
-  {sn:20,name:"Bilyaminu Adamu",designation:"Clerical Officer II",staffNo:"FMCK/JP/049",category:"Junior",isNew:false},
-  {sn:21,name:"Hauwa Abdulhamid",designation:"Health Attendant",staffNo:"FMCK/JP/050",category:"Junior",isNew:false},
-  {sn:22,name:"Abubakar Hassan",designation:"Clerical Officer II",staffNo:"FMCK/JP/051",category:"Junior",isNew:false},
-  {sn:23,name:"Babawuro Babayo",designation:"Health Attendant",staffNo:"FMCK/JP/052",category:"Junior",isNew:false},
-  {sn:24,name:"Babayo Saleh",designation:"Clerical Officer II",staffNo:"FMCK/JP/053",category:"Junior",isNew:false},
-  {sn:26,name:"Mary Kolo Devinefavour",designation:"Nursing Officer II",staffNo:"FMCK/SP/281",category:"Senior",isNew:false},
-  {sn:27,name:"Muhammad Abdulrahman Lawan",designation:"Community Health Technician",staffNo:"FMCK/SP/217",category:"Senior",isNew:false},
-  {sn:28,name:"Muhammad Abubakar",designation:"Asst. Executive Officer",staffNo:"FMCK/SP/282",category:"Senior",isNew:false},
-  {sn:29,name:"Amina Ibrahim Zainab",designation:"Admin Officer II",staffNo:"FMCK/SP/283",category:"Senior",isNew:false},
-  {sn:30,name:"Hadiza Haruna",designation:"Staff Nurse",staffNo:"FMCK/SP/284",category:"Senior",isNew:false},
-  {sn:31,name:"Edward Ennah",designation:"Nursing Officer I",staffNo:"FMCK/SP/285",category:"Senior",isNew:false},
-  {sn:32,name:"Dahiru Adamu",designation:"Medical Lab Scientist",staffNo:"FMCK/SP/280",category:"Senior",isNew:false},
-  {sn:33,name:"Fatima Abubakar El-Nafaty",designation:"Nursing Officer I",staffNo:"FMCK/SP/287",category:"Senior",isNew:false},
-  {sn:34,name:"Rabiatu Ali Baba",designation:"Nursing Officer I",staffNo:"FMCK/SP/288",category:"Senior",isNew:false},
-  {sn:35,name:"Habibu Umar Musa",designation:"Staff Nurse",staffNo:"FMCK/SP/289",category:"Senior",isNew:false},
-  {sn:36,name:"Amina Usman Shinga",designation:"Asst. Executive Officer Admin",staffNo:"FMCK/SP/290",category:"Senior",isNew:false},
-  {sn:37,name:"Ibrahim Manasa Abdu",designation:"Higher Executive Officer Account",staffNo:"FMCK/SP/291",category:"Senior",isNew:false},
-  {sn:38,name:"Haruna Zulkifilu",designation:"Medical Laboratory Technician",staffNo:"FMCK/SP/292",category:"Senior",isNew:false},
-  {sn:39,name:"Amina Muhammad Saleh",designation:"Social Welfare Officer II",staffNo:"FMCK/SP/293",category:"Senior",isNew:false},
-  {sn:40,name:"Evelyn Bulus Gimba",designation:"Staff Nurse",staffNo:"FMCK/SP/294",category:"Senior",isNew:false},
-  {sn:41,name:"Lamogo Monica",designation:"Pharmacy Technician",staffNo:"FMCK/SP/295",category:"Senior",isNew:false},
-  {sn:42,name:"Ibrahim Aliyu Abba",designation:"Program Analyst II",staffNo:"FMCK/SP/296",category:"Senior",isNew:false},
-  {sn:43,name:"Umar Haruna",designation:"Medical Lab Technician",staffNo:"FMCK/SP/297",category:"Senior",isNew:false},
-  {sn:44,name:"Mustapha Muhammad",designation:"Technical Officer Architecture",staffNo:"FMCK/SP/298",category:"Senior",isNew:false},
-  {sn:45,name:"Suwaiba Hassan",designation:"Health Information Management",staffNo:"FMCK/SP/300",category:"Senior",isNew:false},
-  {sn:46,name:"Mustapha Musa",designation:"Admin Officer II",staffNo:"FMCK/SP/301",category:"Senior",isNew:false},
-  {sn:47,name:"Fatsuma Hassan",designation:"Pharmacy Technician",staffNo:"FMCK/SP/304",category:"Senior",isNew:false},
-  {sn:48,name:"Fatima Hassan",designation:"Health Information Management Technician",staffNo:"FMCK/SP/305",category:"Senior",isNew:false},
-  {sn:49,name:"Mubarak Yunusa",designation:"Pharmacy Technician",staffNo:"FMCK/SP/306",category:"Senior",isNew:false},
-  {sn:50,name:"Abdullahi Shamunu",designation:"Accountant II",staffNo:"FMCK/SP/307",category:"Senior",isNew:false},
-  {sn:51,name:"Abubakar Muhammad",designation:"Scientific Officer",staffNo:"FMCK/SP/308",category:"Senior",isNew:false},
-  {sn:52,name:"Abdullahi Umaru Mele",designation:"Higher Technical Officer Mechanic",staffNo:"FMCK/SP/309",category:"Senior",isNew:false},
-  {sn:53,name:"Raliya Musa Kallamu",designation:"Catering Officer",staffNo:"FMCK/SP/310",category:"Senior",isNew:false},
-  {sn:54,name:"Dan Musa Zubairu",designation:"Librarian II",staffNo:"FMCK/SP/311",category:"Senior",isNew:false},
-  {sn:55,name:"Habiba Isah Nneoma",designation:"Nursing Officer I",staffNo:"FMCK/SP/312",category:"Senior",isNew:false},
-  {sn:56,name:"Nafiu Hashimu",designation:"Asst. Executive Officer General Duty",staffNo:"FMCK/SP/313",category:"Senior",isNew:false},
-  {sn:57,name:"Lukman Abubakar Sadiq",designation:"Social Welfare Officer II",staffNo:"FMCK/SP/314",category:"Senior",isNew:false},
-  {sn:58,name:"Maryam Jibrin Abimiku",designation:"Higher Catering Officer",staffNo:"FMCK/SP/315",category:"Senior",isNew:false},
-  {sn:59,name:"Safiyya Dauda Elyasin",designation:"Staff Midwife",staffNo:"FMCK/SP/316",category:"Senior",isNew:false},
-  {sn:60,name:"Sa'adatu Garba",designation:"Senior Nursing Officer",staffNo:"FMCK/SP/317",category:"Senior",isNew:false},
-  {sn:61,name:"Zainab Umar Haruna",designation:"Staff Midwife",staffNo:"FMCK/SP/318",category:"Senior",isNew:false},
-  {sn:62,name:"Fatima Saleh Sani",designation:"Staff Midwife",staffNo:"FMCK/SP/319",category:"Senior",isNew:false},
-  {sn:63,name:"Yasira Salihu Abubakar",designation:"Admin Officer II",staffNo:"FMCK/SP/320",category:"Senior",isNew:false},
-  {sn:64,name:"Aliyu Abubakar Aliyu",designation:"Medical Laboratory Technician",staffNo:"FMCK/SP/321",category:"Senior",isNew:false},
-  {sn:65,name:"Zainab Yusuf",designation:"Medical Laboratory Technician",staffNo:"FMCK/SP/322",category:"Senior",isNew:false},
-  {sn:66,name:"Bawuro Yusuf Aliyu",designation:"Admin Officer II (Acceptance Letter Issue)",staffNo:"FMCK/SP/196",category:"Senior",isNew:false},
-  {sn:67,name:"Muhammad Shafiu Abubakar",designation:"Medical Laboratory Technician",staffNo:"FMCK/SP/324",category:"Senior",isNew:false},
-  {sn:68,name:"Umar Bappayo",designation:"Pharmacy Technician",staffNo:"FMCK/SP/325",category:"Senior",isNew:false},
-  {sn:69,name:"Aliyu Saidu",designation:"Asst. Executive Officer Audit",staffNo:"FMCK/SP/326",category:"Senior",isNew:false},
-  {sn:70,name:"Florence Waziri Pilango",designation:"Staff Nurse",staffNo:"FMCK/SP/327",category:"Senior",isNew:false},
-  {sn:71,name:"Abubakar Isah",designation:"Community Health Technician",staffNo:"FMCK/SP/328",category:"Senior",isNew:false},
-  {sn:72,name:"Hassan Adamu",designation:"Environmental Health Technician",staffNo:"FMCK/SP/329",category:"Senior",isNew:false},
-  {sn:73,name:"Ijeoma Uzoh Roseline",designation:"Senior Nursing Officer",staffNo:"FMCK/SP/330",category:"Senior",isNew:false},
-  {sn:74,name:"Rabiu Yahaya Adamu",designation:"Asst. Executive General Duty",staffNo:"FMCK/SP/331",category:"Senior",isNew:false},
-  {sn:75,name:"Habibu Umar",designation:"Environmental Health Technician",staffNo:"FMCK/SP/332",category:"Senior",isNew:false},
-  {sn:76,name:"Zakari Sa'adu",designation:"Chief Admin. Officer",staffNo:"FMCK/SP/334",category:"Senior",isNew:false},
-  {sn:77,name:"Musa Abubakar",designation:"Asst. Information Officer",staffNo:"FMCK/SP/335",category:"Senior",isNew:false},
-  {sn:78,name:"Aishatu Muhammad Miyim",designation:"Nursing Officer II",staffNo:"FMCK/SP/336",category:"Senior",isNew:false},
-  {sn:79,name:"Ahmed Muhammad Kala",designation:"Community Health Technician",staffNo:"FMCK/SP/337",category:"Senior",isNew:false},
-  {sn:80,name:"Yusuf Abubakar Muhammad",designation:"Chief Pharmacist",staffNo:"FMCK/SP/338",category:"Senior",isNew:false},
-  {sn:81,name:"Asiya Abubakar Adamu",designation:"Staff Midwife",staffNo:"FMCK/SP/339",category:"Senior",isNew:false},
-  {sn:82,name:"Ibrahim Saidu Haruna",designation:"Environmental Health Technician",staffNo:"FMCK/SP/216",category:"Senior",isNew:false},
-  {sn:83,name:"Shamsiya Hassan Mahdi",designation:"Pharmacy Technician",staffNo:"FMCK/SP/218",category:"Senior",isNew:false},
-  {sn:84,name:"Ummisalma Umar",designation:"Scientific Officer",staffNo:"FMCK/SP/219",category:"Senior",isNew:false},
-  {sn:85,name:"Aishatu Ali Difa",designation:"Staff Midwife",staffNo:"FMCK/SP/222",category:"Senior",isNew:false},
-  {sn:86,name:"Haruna Hajara",designation:"Staff Midwife",staffNo:"FMCK/SP/223",category:"Senior",isNew:false},
-  {sn:87,name:"Abubakar Galaya Magaji",designation:"Population Program Officer II",staffNo:"FMCK/SP/224",category:"Senior",isNew:false},
-  {sn:88,name:"Hassan Abba",designation:"Health Information Management Technician",staffNo:"FMCK/SP/225",category:"Senior",isNew:false},
-  {sn:89,name:"Aishatu Abdullahi Okposhi",designation:"Psychologist",staffNo:"FMCK/SP/227",category:"Senior",isNew:false},
-  {sn:90,name:"Dorcas Samuel Bello",designation:"Senior Nursing Officer",staffNo:"FMCK/SP/228",category:"Senior",isNew:false},
-  {sn:91,name:"Auwal Hamza Hamza",designation:"Health Education Officer II",staffNo:"FMCK/SP/226",category:"Senior",isNew:false},
-  {sn:92,name:"Murjanatu Haruna Abdullahi",designation:"Health Information Management Technician",staffNo:"FMCK/SP/242",category:"Senior",isNew:false},
-  {sn:93,name:"Hafsat Umar",designation:"Senior Scientific Officer",staffNo:"FMCK/SP/244",category:"Senior",isNew:false},
-  {sn:94,name:"Nafisa Abubakar Shinga",designation:"Community Health Technician",staffNo:"FMCK/SP/245",category:"Senior",isNew:false},
-  {sn:95,name:"Suleiman Hassan",designation:"Social Welfare Officer II",staffNo:"FMCK/SP/246",category:"Senior",isNew:false},
-  {sn:96,name:"Rufa'atu Mele Hinna",designation:"Catering Officer",staffNo:"FMCK/SP/247",category:"Senior",isNew:false},
-  {sn:97,name:"Mahmoud Nazeefa",designation:"Senior Nursing Officer",staffNo:"FMCK/SP/248",category:"Senior",isNew:false},
-  {sn:98,name:"Mujahid Shuaibu",designation:"Medical Laboratory Technician",staffNo:"FMCK/SP/249",category:"Senior",isNew:false},
-  {sn:99,name:"Abdulsalam Muhammad Magaji",designation:"Asst. Executive Officer General Duty",staffNo:"FMCK/SP/250",category:"Senior",isNew:false},
-  {sn:100,name:"Bashir Ibrahim Sabo",designation:"Medical Laboratory Technician",staffNo:"FMCK/SP/251",category:"Senior",isNew:false},
-  {sn:101,name:"Aminu Dahiru",designation:"Scientific Officer II",staffNo:"FMCK/SP/252",category:"Senior",isNew:false},
-  {sn:102,name:"Muhammad Nura Umar",designation:"Scientific Officer II",staffNo:"FMCK/SP/253",category:"Senior",isNew:false},
-  {sn:103,name:"Yusuf Blessing",designation:"Health Education Officer II",staffNo:"FMCK/SP/254",category:"Senior",isNew:false},
-  {sn:104,name:"Zaiyad Usman",designation:"Nursing Officer I",staffNo:"FMCK/SP/255",category:"Senior",isNew:false},
-  {sn:105,name:"Yila Salomi",designation:"Health Information Management Technician",staffNo:"FMCK/SP/256",category:"Senior",isNew:false},
-  {sn:106,name:"Nafisa Muhammad Aliyu",designation:"Community Health Technician",staffNo:"FMCK/SP/257",category:"Senior",isNew:false},
-  {sn:107,name:"Maryam Idris Isah",designation:"Dental Surgery Technician",staffNo:"FMCK/SP/258",category:"Senior",isNew:false},
-  {sn:108,name:"Haruna Saidu Adamu",designation:"Information Officer II",staffNo:"FMCK/SP/259",category:"Senior",isNew:false},
-  {sn:109,name:"Musa Adamu",designation:"Higher Executive Officer Admin",staffNo:"FMCK/SP/260",category:"Senior",isNew:false},
-  {sn:110,name:"Muhammad Auwal Abdullahi",designation:"Planning Officer II",staffNo:"FMCK/SP/261",category:"Senior",isNew:false},
-  {sn:111,name:"Sadika Iliyasu",designation:"Dental Surgery Technician",staffNo:"FMCK/SP/262",category:"Senior",isNew:false},
-  {sn:112,name:"Nasir Sulaiman",designation:"Accountant II",staffNo:"FMCK/SP/263",category:"Senior",isNew:false},
-  {sn:113,name:"Anas Yunusa",designation:"Asst. Store Officer",staffNo:"FMCK/SP/264",category:"Senior",isNew:false},
-  {sn:114,name:"Adamu Abubakar Gabanni",designation:"Dispensing Optician",staffNo:"FMCK/SP/266",category:"Senior",isNew:false},
-  {sn:115,name:"Umar Faruk Bello",designation:"Program Analyst",staffNo:"FMCK/SP/267",category:"Senior",isNew:false},
-  {sn:116,name:"Abubakar Kabir Muhammad",designation:"Scientific Officer",staffNo:"FMCK/SP/268",category:"Senior",isNew:false},
-  {sn:117,name:"Usman Yakubu Adam",designation:"Pharmacy Technician",staffNo:"FMCK/SP/269",category:"Senior",isNew:false},
-  {sn:118,name:"Nana Aisha Abubakar",designation:"Scientific Officer II",staffNo:"FMCK/SP/270",category:"Senior",isNew:false},
-  {sn:119,name:"Ezra Elizabeth",designation:"Staff Midwife",staffNo:"FMCK/SP/271",category:"Senior",isNew:false},
-  {sn:120,name:"Musa Hadi Mohammed",designation:"Program Analyst II",staffNo:"FMCK/SP/277",category:"Senior",isNew:false}
-];
-
-// ── GOOGLE SIGN-IN ──
+// ── GOOGLE SIGN-IN ───────────────────────────────
 function signInWithGoogle() {
+  setSyncBar('syncing','Waiting for Google sign-in…');
   const client = google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
-    scope: SCOPES + ' https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+    scope: SCOPES,
     callback: async (resp) => {
-      if (resp.error) { document.getElementById('si-err').textContent = 'Google sign-in failed: ' + resp.error; return; }
+      if (resp.error) { err('Google sign-in failed: ' + resp.error); return; }
       accessToken = resp.access_token;
       try {
-        const info = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: 'Bearer ' + accessToken } }).then(r => r.json());
-        currentUser = { displayName: info.name || info.email, email: info.email, picture: info.picture, isGoogle: true };
-        sessionStorage.setItem(SESSION_KEY, JSON.stringify({ ...currentUser, accessToken }));
-        await initApp();
-      } catch(e) { document.getElementById('si-err').textContent = 'Could not fetch Google profile.'; }
+        const info = await gFetch('https://www.googleapis.com/oauth2/v3/userinfo');
+        currentUser = { displayName: info.name||info.email, email: info.email, picture: info.picture, isGoogle:true, accessToken };
+        sessionStorage.setItem(SESS_KEY, JSON.stringify(currentUser));
+        showApp();
+        await loadFromSheets();
+        startAutoSync();
+      } catch(e) { err('Could not load profile: '+e.message); }
     }
   });
   client.requestAccessToken();
 }
 
-// ── LOCAL SIGN-IN ──
+// ── LOCAL SIGN-IN ───────────────────────────────
 function doLocalSignIn() {
   const u = document.getElementById('si-user').value.trim().toLowerCase();
   const p = document.getElementById('si-pass').value;
-  const user = LOCAL_USERS[u];
-  if (!user || user.password !== p) { document.getElementById('si-err').textContent = 'Incorrect username or password.'; return; }
-  currentUser = { displayName: user.displayName, isGoogle: false };
-  sessionStorage.setItem(SESSION_KEY, JSON.stringify(currentUser));
+  const usr = LOCAL_USERS[u];
+  if (!usr || usr.password !== p) { document.getElementById('si-err').textContent='Incorrect username or password.'; return; }
+  currentUser = { displayName: usr.displayName, isGoogle:false };
+  sessionStorage.setItem(SESS_KEY, JSON.stringify(currentUser));
   accessToken = null;
-  loadLocalDB();
+  loadLocal();
   showApp();
-  setSyncBar('local', 'Local mode — changes saved on this device only');
+  setSyncBar('local','Offline mode — changes saved locally only');
 }
 
 function doSignOut() {
-  if (currentUser && currentUser.isGoogle) google.accounts.oauth2.revoke(accessToken, () => {});
-  sessionStorage.removeItem(SESSION_KEY);
-  currentUser = null; accessToken = null; driveFileId = null;
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('signin-screen').style.display = 'flex';
-  document.getElementById('si-pass').value = '';
-  document.getElementById('si-err').textContent = '';
+  if (currentUser?.isGoogle) try { google.accounts.oauth2.revoke(accessToken, ()=>{}); } catch(e){}
+  sessionStorage.removeItem(SESS_KEY);
+  currentUser=null; accessToken=null;
+  if (autoTimer) clearInterval(autoTimer);
+  document.getElementById('app').style.display='none';
+  document.getElementById('signin-screen').style.display='flex';
+  document.getElementById('si-pass').value='';
+  document.getElementById('si-err').textContent='';
 }
 
-// ── SESSION RESTORE ──
-window.onload = async function() {
-  const s = sessionStorage.getItem(SESSION_KEY);
+// ── SESSION RESTORE ──────────────────────────────
+window.onload = async () => {
+  document.getElementById('sheets-link').href = SHEET_URL;
+  const s = sessionStorage.getItem(SESS_KEY);
   if (!s) return;
   try {
-    const saved = JSON.parse(s);
-    currentUser = saved;
-    if (saved.isGoogle && saved.accessToken) {
-      accessToken = saved.accessToken;
-      await initApp();
-    } else {
-      accessToken = null;
-      loadLocalDB();
+    currentUser = JSON.parse(s);
+    if (currentUser.isGoogle && currentUser.accessToken) {
+      accessToken = currentUser.accessToken;
       showApp();
-      setSyncBar('local', 'Local mode — changes saved on this device only');
+      await loadFromSheets();
+      startAutoSync();
+    } else {
+      loadLocal(); showApp();
+      setSyncBar('local','Offline mode — changes saved locally only');
     }
-  } catch(e) { sessionStorage.removeItem(SESSION_KEY); }
+  } catch(e) { sessionStorage.removeItem(SESS_KEY); }
 };
 
-// ── INIT APP (Google) ──
-async function initApp() {
-  loadLocalDB();
-  showApp();
-  setSyncBar('syncing', 'Connecting to Google Drive…');
+// ── GOOGLE SHEETS API ────────────────────────────
+async function gFetch(url, opts={}) {
+  const res = await fetch(url, { ...opts, headers: { ...(opts.headers||{}), Authorization:'Bearer '+accessToken, 'Content-Type':'application/json' } });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+const SHEETS_BASE = 'https://sheets.googleapis.com/v4/spreadsheets/' + SHEET_ID;
+
+async function loadFromSheets() {
+  setSyncBar('syncing','Loading from Google Sheets…');
   try {
-    await findOrCreateFile();
-    await loadFromDrive();
-    setSyncBar('ok', 'Synced with Google Drive');
-    schedulAutoSync();
+    const range = encodeURIComponent(SHEET_TAB + '!A6:L');
+    const data  = await gFetch(SHEETS_BASE + '/values/' + range + '?valueRenderOption=FORMATTED_VALUE');
+    const rows  = data.values || [];
+    db = rows
+      .filter(r => r[COL.staffNo] && r[COL.name])
+      .map((r,i) => ({
+        _row   : DATA_START + i,
+        sn     : r[COL.sn]          || (i+1),
+        name   : r[COL.name]        || '',
+        designation: r[COL.designation] || '',
+        staffNo: r[COL.staffNo]     || '',
+        category: r[COL.category]   || 'Senior',
+        department: r[COL.department]|| '',
+        dateAdded: r[COL.dateAdded] || '',
+        phone  : r[COL.phone]       || '',
+        email  : r[COL.email]       || '',
+        status : r[COL.status]      || 'Active',
+        remarks: r[COL.remarks]     || '',
+        isNew  : false,
+      }));
+    saveLocal();
+    render(); updateStats();
+    setSyncBar('ok','Synced with Google Sheets ✔');
+    document.getElementById('last-sync').textContent = 'Last sync: '+new Date().toLocaleTimeString();
+    document.getElementById('footer-count').textContent = db.length+' records in Google Sheets';
   } catch(e) {
-    setSyncBar('error', 'Drive sync failed — using local data. ' + (e.message || ''));
+    setSyncBar('error','Sheets error: '+e.message+' — showing local data');
+    loadLocal(); render(); updateStats();
   }
 }
 
-// ── DRIVE HELPERS ──
-async function driveReq(url, opts = {}) {
-  opts.headers = { ...(opts.headers || {}), Authorization: 'Bearer ' + accessToken };
-  const res = await fetch(url, opts);
-  if (!res.ok) { const t = await res.text(); throw new Error(t); }
-  return res;
+async function appendRowToSheets(row) {
+  const today = new Date().toLocaleDateString('en-GB');
+  const values = [[
+    row.sn, row.name, row.designation, row.staffNo,
+    row.category, row.department||'', today,
+    row.phone||'', row.email||'', '', row.status||'Active', row.remarks||''
+  ]];
+  const range = encodeURIComponent(SHEET_TAB + '!A:L');
+  await gFetch(SHEETS_BASE+'/values/'+range+':append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS', {
+    method:'POST', body: JSON.stringify({ values })
+  });
 }
 
-async function findOrCreateFile() {
-  const q = encodeURIComponent(`name='${FILE_NAME}' and mimeType='application/json' and trashed=false`);
-  const res = await driveReq(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name)`);
-  const data = await res.json();
-  if (data.files && data.files.length > 0) {
-    driveFileId = data.files[0].id;
-  } else {
-    const meta = { name: FILE_NAME, mimeType: 'application/json' };
-    const cr = await driveReq('https://www.googleapis.com/drive/v3/files', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(meta)
-    });
-    const f = await cr.json();
-    driveFileId = f.id;
-    await saveToDrive();
-  }
-}
-
-async function loadFromDrive() {
-  if (!driveFileId) return;
-  const res = await driveReq(`https://www.googleapis.com/drive/v3/files/${driveFileId}?alt=media`);
-  const text = await res.text();
-  if (!text || text.trim() === '') return;
-  try {
-    const remote = JSON.parse(text);
-    if (Array.isArray(remote) && remote.length > 0) {
-      db = remote;
-      localStorage.setItem(LOCAL_KEY, JSON.stringify(db));
-      render(); updateStats();
-      document.getElementById('last-synced').textContent = 'Last synced: ' + new Date().toLocaleTimeString();
-    }
-  } catch(e) {}
-}
-
-async function saveToDrive() {
-  if (!driveFileId || !accessToken) return;
-  setSyncBar('syncing', 'Saving to Google Drive…');
-  try {
-    await driveReq(`https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media`, {
-      method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(db)
-    });
-    setSyncBar('ok', 'Synced with Google Drive ✔');
-    document.getElementById('last-synced').textContent = 'Last synced: ' + new Date().toLocaleTimeString();
-  } catch(e) {
-    setSyncBar('error', 'Could not save to Drive — data kept locally.');
-  }
+async function deleteRowFromSheets(sheetRow) {
+  // Get sheet metadata to find sheetId
+  const meta = await gFetch(SHEETS_BASE+'?fields=sheets.properties');
+  const sheetId = meta.sheets.find(s=>s.properties.title===SHEET_TAB)?.properties?.sheetId;
+  if (sheetId === undefined) throw new Error('Sheet tab not found');
+  await gFetch(SHEETS_BASE+':batchUpdate', {
+    method:'POST',
+    body: JSON.stringify({ requests: [{ deleteDimension: {
+      range: { sheetId, dimension:'ROWS', startIndex: sheetRow-1, endIndex: sheetRow }
+    } }] })
+  });
 }
 
 async function syncNow() {
-  if (!accessToken) { setSyncBar('local', 'Local mode — sign in with Google to sync'); return; }
-  setSyncBar('syncing', 'Syncing…');
-  try { await loadFromDrive(); await saveToDrive(); } catch(e) { setSyncBar('error', 'Sync failed: ' + (e.message||'')); }
+  if (!accessToken) { setSyncBar('local','Sign in with Google to sync'); return; }
+  await loadFromSheets();
 }
 
-function schedulAutoSync() {
-  if (syncTimer) clearInterval(syncTimer);
-  syncTimer = setInterval(() => { if (accessToken) loadFromDrive(); }, 60000);
+function startAutoSync() {
+  if (autoTimer) clearInterval(autoTimer);
+  autoTimer = setInterval(() => { if (accessToken) loadFromSheets(); }, 60000);
 }
 
-// ── LOCAL DB ──
-function loadLocalDB() {
-  const s = localStorage.getItem(LOCAL_KEY);
-  if (s) { try { db = JSON.parse(s); } catch(e) { db = JSON.parse(JSON.stringify(DEFAULT_DB)); } }
-  else { db = JSON.parse(JSON.stringify(DEFAULT_DB)); localStorage.setItem(LOCAL_KEY, JSON.stringify(db)); }
+// ── LOCAL STORAGE ────────────────────────────────
+function loadLocal() {
+  try { db = JSON.parse(localStorage.getItem(LOCAL_KEY)||'[]'); } catch(e) { db=[]; }
 }
-
 function saveLocal() {
   localStorage.setItem(LOCAL_KEY, JSON.stringify(db));
-  document.getElementById('storage-info').textContent = db.length + ' staff records';
 }
 
-// ── SHOW APP UI ──
+// ── SHOW APP ─────────────────────────────────────
 function showApp() {
-  document.getElementById('signin-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  const wrap = document.getElementById('user-avatar-wrap');
+  document.getElementById('signin-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+  const wrap = document.getElementById('avatar-wrap');
   if (currentUser.picture) {
-    wrap.innerHTML = '<img class="avatar-ring" src="' + currentUser.picture + '" alt="">';
+    wrap.innerHTML='<img class="avatar-img" src="'+currentUser.picture+'" alt="">';
   } else {
     const init = currentUser.displayName.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-    wrap.innerHTML = '<div class="avatar-init">' + init + '</div>';
+    wrap.innerHTML='<div class="avatar-init">'+init+'</div>';
   }
-  document.getElementById('user-name-display').textContent = currentUser.displayName;
+  document.getElementById('user-label').textContent = currentUser.displayName;
   render(); updateStats();
-  document.getElementById('storage-info').textContent = db.length + ' staff records';
 }
 
 function setSyncBar(type, msg) {
   const bar = document.getElementById('sync-bar');
-  bar.className = 'sync-bar' + (type === 'ok' ? '' : ' ' + type);
+  bar.className = 'sync-bar'+(type==='ok'?'':' '+type);
   document.getElementById('sync-msg').textContent = msg;
 }
+function err(msg) { document.getElementById('si-err').textContent=msg; setSyncBar('error',msg); }
 
-// ── PASTE & DATA ──
-function toTitleCase(s) { return s.toLowerCase().replace(/\b\w/g, c => c.toUpperCase()); }
-function inferCat(n) { return (n||'').toUpperCase().includes('/JP/') ? 'Junior' : 'Senior'; }
+// ── PASTE & ADD ──────────────────────────────────
+function toTitle(s) { return s.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()); }
+function inferCat(n) { return (n||'').toUpperCase().includes('/JP/')?'Junior':'Senior'; }
 
 function parseLine(line) {
-  line = line.trim(); if (!line) return null;
-  const parts = line.split(/\s*-\s*/);
-  if (parts.length < 2) return null;
-  let name, designation, staffNo;
-  if (parts.length >= 3) {
-    name = toTitleCase(parts[0].trim());
-    staffNo = parts[parts.length-1].trim().toUpperCase();
-    designation = toTitleCase(parts.slice(1, parts.length-1).join(' - ').trim());
-  } else {
-    name = toTitleCase(parts[0].trim());
-    designation = toTitleCase(parts[1].trim());
-    staffNo = '';
-  }
-  if (!name) return null;
-  if (staffNo && !/FMCK\/(SP|JP)\/\d+/i.test(staffNo)) return null;
-  return { name, designation, staffNo, category: inferCat(staffNo), isNew: true };
+  line=line.trim(); if(!line) return null;
+  const parts=line.split(/\s*-\s*/);
+  if(parts.length<2) return null;
+  let name,designation,staffNo;
+  if(parts.length>=3) {
+    name=toTitle(parts[0].trim());
+    staffNo=parts[parts.length-1].trim().toUpperCase();
+    designation=toTitle(parts.slice(1,parts.length-1).join(' - ').trim());
+  } else { name=toTitle(parts[0].trim()); designation=toTitle(parts[1].trim()); staffNo=''; }
+  if(!name) return null;
+  if(staffNo && !/FMCK\/(SP|JP)\/\d+/i.test(staffNo)) return null;
+  return {name,designation,staffNo,category:inferCat(staffNo),status:'Active',isNew:true};
 }
 
 async function handlePaste() {
-  const raw = document.getElementById('paste-in').value.trim();
-  if (!raw) { showFeedback('err', 'The paste box is empty.'); return; }
-  const lines = raw.split('\n').filter(l => l.trim());
-  const parsed = [], errors = [], dupes = [];
-  lines.forEach(line => {
-    const r = parseLine(line);
-    if (!r) { errors.push(line); return; }
-    const dupName = db.find(x => x.name.toLowerCase() === r.name.toLowerCase());
-    const dupNo = r.staffNo && db.find(x => x.staffNo.toLowerCase() === r.staffNo.toLowerCase());
-    if (dupName) { dupes.push(r.name + ' (name exists)'); return; }
-    if (dupNo) { dupes.push(r.staffNo + ' (staff no. exists)'); return; }
+  const raw=document.getElementById('paste-in').value.trim();
+  if(!raw){showFeedback('err','Paste box is empty.');return;}
+  const lines=raw.split('\n').filter(l=>l.trim());
+  const parsed=[],errors=[],dupes=[];
+  lines.forEach(line=>{
+    const r=parseLine(line);
+    if(!r){errors.push(line);return;}
+    if(db.find(x=>x.name.toLowerCase()===r.name.toLowerCase())){dupes.push(r.name+' (name exists)');return;}
+    if(r.staffNo&&db.find(x=>x.staffNo.toLowerCase()===r.staffNo.toLowerCase())){dupes.push(r.staffNo+' (staff no. exists)');return;}
     parsed.push(r);
   });
-  if (parsed.length === 0 && errors.length > 0) { showFeedback('err', 'Could not parse. Format: NAME - DESIGNATION - FMCK/SP/000'); return; }
-  const nextSn = db.length > 0 ? Math.max(...db.map(x => x.sn)) + 1 : 1;
-  parsed.forEach((r, i) => { r.sn = nextSn + i; db.push(r); });
-  if (parsed.length > 0) {
-    saveLocal();
-    document.getElementById('paste-in').value = '';
-    if (accessToken) await saveToDrive();
+  if(!parsed.length&&errors.length){showFeedback('err','Cannot parse. Format: NAME - DESIGNATION - FMCK/SP/000');return;}
+  const nextSn=db.length>0?Math.max(...db.map(x=>+x.sn||0))+1:1;
+  for(let i=0;i<parsed.length;i++){
+    parsed[i].sn=nextSn+i;
+    db.push(parsed[i]);
+    if(accessToken) {
+      setSyncBar('syncing','Saving to Google Sheets…');
+      try{await appendRowToSheets(parsed[i]);}catch(e){setSyncBar('error','Saved locally but Sheets error: '+e.message);}
+    }
   }
-  let msg = '';
-  if (parsed.length) msg += parsed.map(r => '&#10003; Added: <strong>' + r.name + '</strong> &mdash; ' + r.designation + ' &mdash; ' + (r.staffNo||'no staff no.')).join('<br>');
-  if (dupes.length) msg += (msg?'<br>':'') + dupes.map(d => '&#9888; Skipped: ' + d).join('<br>');
-  if (errors.length) msg += (msg?'<br>':'') + errors.map(e => '&#10007; Could not parse: &ldquo;' + e + '&rdquo;').join('<br>');
-  showFeedback(parsed.length > 0 ? (dupes.length||errors.length ? 'warn' : 'ok') : 'err', msg);
-  render(); updateStats();
-}
-
-function showFeedback(type, html) {
-  const el = document.getElementById('feedback');
-  el.className = 'feedback ' + type; el.innerHTML = html;
-}
-
-function sortBy(col) {
-  if (sortCol === col) sortDir *= -1; else { sortCol = col; sortDir = 1; } render();
-}
-
-function render() {
-  const q = document.getElementById('search').value.toLowerCase();
-  const cat = document.getElementById('catF').value;
-  let data = db.filter(r => {
-    const m = !q || r.name.toLowerCase().includes(q) || r.designation.toLowerCase().includes(q) || r.staffNo.toLowerCase().includes(q);
-    return m && (!cat || r.category === cat);
-  });
-  data.sort((a,b) => sortCol==='sn' ? (a.sn-b.sn)*sortDir : String(a[sortCol]).localeCompare(String(b[sortCol]))*sortDir);
-  ['sn','name','designation','staffNo','category'].forEach(c => {
-    document.getElementById('s-'+c).textContent = sortCol===c ? (sortDir===1?' ▲':' ▼') : '';
-  });
-  const tbody = document.getElementById('tbody');
-  const empty = document.getElementById('empty');
-  if (!data.length) { tbody.innerHTML=''; empty.style.display='block'; }
-  else {
-    empty.style.display='none';
-    tbody.innerHTML = data.map(r => {
-      const bc = r.category==='Senior' ? 'b-senior' : 'b-junior';
-      const nr = r.isNew ? ' class="new-entry"' : '';
-      return '<tr'+nr+'><td style="color:#7EA88D;text-align:center;font-size:12px">'+r.sn+'</td><td style="font-weight:500">'+r.name+'</td><td style="color:#3A6B4E">'+r.designation+'</td><td class="mono">'+r.staffNo+'</td><td><span class="badge '+bc+'">'+r.category+'</span></td><td style="text-align:center"><button class="del-btn" onclick="deleteRow('+r.sn+')" title="Remove">&#10005;</button></td></tr>';
-    }).join('');
-  }
-  document.getElementById('cnt').textContent = data.length + ' of ' + db.length + ' staff';
-}
-
-async function deleteRow(sn) {
-  if (!confirm('Remove this staff member?')) return;
-  db = db.filter(r => r.sn !== sn);
   saveLocal();
-  if (accessToken) await saveToDrive();
-  render(); updateStats();
+  if(parsed.length&&accessToken) {
+    await loadFromSheets();
+  } else {
+    render(); updateStats();
+  }
+  document.getElementById('paste-in').value='';
+  let msg='';
+  if(parsed.length) msg+=parsed.map(r=>'&#10003; Added: <strong>'+r.name+'</strong> &mdash; '+r.designation+' &mdash; '+(r.staffNo||'no staff no.')).join('<br>');
+  if(dupes.length)  msg+=(msg?'<br>':'')+dupes.map(d=>'&#9888; Skipped: '+d).join('<br>');
+  if(errors.length) msg+=(msg?'<br>':'')+errors.map(e=>'&#10007; Cannot parse: &ldquo;'+e+'&rdquo;').join('<br>');
+  showFeedback(parsed.length>0?(dupes.length||errors.length?'warn':'ok'):'err',msg);
 }
 
-function updateStats() {
-  document.getElementById('st-total').textContent = db.length;
-  document.getElementById('st-senior').textContent = db.filter(r=>r.category==='Senior').length;
-  document.getElementById('st-junior').textContent = db.filter(r=>r.category==='Junior').length;
+function showFeedback(type,html){
+  const el=document.getElementById('feedback');
+  el.className='feedback '+type; el.innerHTML=html;
 }
 
-function exportCSV() {
-  const hdr = ['S/N','Name','Designation','Staff Number','Category'];
-  const rows = db.map(r => [r.sn,'"'+r.name+'"','"'+r.designation+'"',r.staffNo,r.category]);
-  const csv = [hdr,...rows].map(r=>r.join(',')).join('\n');
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  a.download = 'FMCK_Staff_List.csv'; a.click();
+// ── DELETE ────────────────────────────────────────
+async function deleteRow(staffNo, sheetRow) {
+  if(!confirm('Remove this staff member from the database?')) return;
+  db=db.filter(r=>r.staffNo!==staffNo);
+  saveLocal();
+  if(accessToken&&sheetRow) {
+    setSyncBar('syncing','Removing from Google Sheets…');
+    try{await deleteRowFromSheets(sheetRow); await loadFromSheets();}
+    catch(e){setSyncBar('error','Removed locally but Sheets error: '+e.message);render();updateStats();}
+  } else {render();updateStats();}
 }
 
-document.addEventListener('keydown', e => {
-  if (e.key==='Enter' && e.ctrlKey && document.activeElement===document.getElementById('paste-in')) handlePaste();
-  if (e.key==='Enter' && (document.activeElement===document.getElementById('si-user')||document.activeElement===document.getElementById('si-pass'))) doLocalSignIn();
+// ── TABLE ─────────────────────────────────────────
+function sortBy(col){
+  if(sortCol===col) sortDir*=-1; else{sortCol=col;sortDir=1;} render();
+}
+
+function render(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const cat=document.getElementById('catF').value;
+  const stat=document.getElementById('statusF').value;
+  let data=db.filter(r=>{
+    const m=!q||r.name.toLowerCase().includes(q)||r.designation.toLowerCase().includes(q)||r.staffNo.toLowerCase().includes(q)||(r.department||'').toLowerCase().includes(q);
+    return m&&(!cat||r.category===cat)&&(!stat||r.status===stat);
+  });
+  data.sort((a,b)=>{
+    if(sortCol==='sn') return (+a.sn - +b.sn)*sortDir;
+    return String(a[sortCol]||'').localeCompare(String(b[sortCol]||''))*sortDir;
+  });
+  ['sn','name','designation','staffNo','category','department','status'].forEach(c=>{
+    document.getElementById('s-'+c).textContent=sortCol===c?(sortDir===1?' ▲':' ▼'):'';
+  });
+  const tbody=document.getElementById('tbody');
+  const empty=document.getElementById('empty');
+  if(!data.length){tbody.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  tbody.innerHTML=data.map(r=>{
+    const bc=r.category==='Senior'?'b-senior':'b-junior';
+    const sc=r.status==='Active'?'b-active':'b-inactive';
+    const nr=r.isNew?' class="new-row"':'';
+    const dept=r.department?'<span style="font-size:11px;color:var(--text3)">'+r.department+'</span>':'<span style="color:var(--text3);font-size:11px">&mdash;</span>';
+    return '<tr'+nr+'>'
+      +'<td style="color:var(--text3);text-align:center;font-size:12px">'+r.sn+'</td>'
+      +'<td style="font-weight:500">'+r.name+'</td>'
+      +'<td style="color:var(--text2)">'+r.designation+'</td>'
+      +'<td class="mono">'+r.staffNo+'</td>'
+      +'<td><span class="badge '+bc+'">'+r.category+'</span></td>'
+      +'<td>'+dept+'</td>'
+      +'<td><span class="badge '+sc+'">'+r.status+'</span></td>'
+      +'<td style="text-align:center"><button class="del-btn" onclick="deleteRow(''+r.staffNo+'','+( r._row||0)+')" title="Remove">✕</button></td>'
+      +'</tr>';
+  }).join('');
+  document.getElementById('cnt').textContent=data.length+' of '+db.length;
+}
+
+function updateStats(){
+  document.getElementById('st-total').textContent=db.length;
+  document.getElementById('st-senior').textContent=db.filter(r=>r.category==='Senior').length;
+  document.getElementById('st-junior').textContent=db.filter(r=>r.category==='Junior').length;
+  document.getElementById('st-active').textContent=db.filter(r=>r.status==='Active').length;
+  document.getElementById('footer-count').textContent=db.length+' records';
+}
+
+function exportCSV(){
+  const hdr=['S/N','Name','Designation','Staff Number','Category','Department','Status'];
+  const rows=db.map(r=>[r.sn,'"'+r.name+'"','"'+r.designation+'"',r.staffNo,r.category,r.department||'',r.status||'Active']);
+  const csv=[hdr,...rows].map(r=>r.join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='FMCK_Staff_List.csv'; a.click();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.ctrlKey&&document.activeElement===document.getElementById('paste-in')) handlePaste();
+  if(e.key==='Enter'&&(document.activeElement===document.getElementById('si-user')||document.activeElement===document.getElementById('si-pass'))) doLocalSignIn();
 });
 </script>
 </body>
